@@ -4,7 +4,7 @@
     <div class="text-center">
         <h1>
             Comics
-            {{-- <a href="{{ route('comics.create') }}">+</a> --}}
+            <a href="{{ route('comic.create') }}">+</a>
         </h1>
         <ul class="list-unstyled">
             @foreach ($comics as $comic)
