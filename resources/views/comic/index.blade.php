@@ -6,15 +6,25 @@
             Comics
             <a href="{{ route('comic.create') }}">+</a>
         </h1>
-        <ul class="list-unstyled" style="width: 40%; margin: 0 auto">
+        <ul class="list-unstyled" style="width: 45%; margin: 0 auto">
             @foreach ($comics as $comic)
                 <li class="d-flex justify-content-between">
                     <a href="{{ route('comic.show', $comic->id) }}">
                         {{ $comic->title }}
                     </a>
-                    <a class="btn btn-primary" href="{{ route('comic.edit', $comic->id) }}">
-                        EDIT
-                    </a>
+                    <div class="d-flex">
+                        <a class="btn btn-primary" href="{{ route('comic.edit', $comic->id) }}">
+                            EDIT
+                        </a>
+
+                        <form method="POST" action="{{ route('comic.destroy', $comic->id) }}">
+
+                            @csrf
+                            @method('DELETE')
+
+                            <input class="btn btn-danger" type="submit" value="DELETE">
+                        </form>
+                    </div>
                 </li>
             @endforeach
         </ul>

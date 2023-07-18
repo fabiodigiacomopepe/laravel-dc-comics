@@ -26,3 +26,5 @@ Route::get('/show/{id}', [PageController::class, 'show']) -> name('comic.show');
 Route::get('/edit/{id}', [PageController::class, 'edit']) -> name('comic.edit');
 
 Route::put('/update/{id}', [PageController::class, 'update']) -> name('comic.update');
+
+Route::delete('/destroy/{id}', [PageController::class, 'destroy']) -> name('comic.destroy');

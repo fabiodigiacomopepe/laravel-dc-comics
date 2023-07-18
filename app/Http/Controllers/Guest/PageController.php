@@ -66,4 +66,13 @@ class PageController extends Controller
 
         return redirect() -> route("comic.show", $comic -> id);
     }
+
+    public function destroy($id) {
+
+        $comic = Comic :: findOrFail($id);
+
+        $comic -> delete();
+
+        return redirect() -> route("comic.index");
+    }
 }
