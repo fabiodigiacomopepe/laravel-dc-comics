@@ -32,18 +32,27 @@ class PageController extends Controller
 
         $data = $request -> all();
 
-        $comic = Comic :: create([
-            "title" => $data["title"],
-            "description" => $data["description"],
-            "thumb" => $data["thumb"],
-            "price" => $data["price"],
-            "series" => $data["series"],
-            "sale_date" => $data["sale_date"],
-            "type" => $data["type"],
-            "artists" => $data["artists"],
-            "writers" => $data["writers"]
-        ]);
+        $comic = Comic :: create($data);
+
+        // $comic = Comic :: create([
+        //     "title" => $data["title"],
+        //     "description" => $data["description"],
+        //     "thumb" => $data["thumb"],
+        //     "price" => $data["price"],
+        //     "series" => $data["series"],
+        //     "sale_date" => $data["sale_date"],
+        //     "type" => $data["type"],
+        //     "artists" => $data["artists"],
+        //     "writers" => $data["writers"]
+        // ]);
 
         return redirect() -> route("comic.show", $comic -> id);
+    }
+
+    public function edit($id) {
+
+        $comic = Comic :: findOrFail($id);
+
+        return view('comic.edit', compact('comic'));
     }
 }
