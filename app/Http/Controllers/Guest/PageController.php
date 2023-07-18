@@ -55,4 +55,15 @@ class PageController extends Controller
 
         return view('comic.edit', compact('comic'));
     }
+
+    public function update(Request $request, $id) {
+
+        $data = $request -> all();
+
+        $comic = Comic :: findOrFail($id);
+
+        $comic -> update($data);
+
+        return redirect() -> route("comic.show", $comic -> id);
+    }
 }
