@@ -30,7 +30,10 @@ class PageController extends Controller
 
     public function store(Request $request) {
 
-        $data = $request -> all();
+        $data = $request -> validate(
+            $this -> getValidationRules(),
+            $this -> getValidationMessages()
+        );
 
         $comic = Comic :: create($data);
 
@@ -58,7 +61,10 @@ class PageController extends Controller
 
     public function update(Request $request, $id) {
 
-        $data = $request -> all();
+        $data = $request -> validate(
+            $this -> getValidationRules(),
+            $this -> getValidationMessages()
+        );
 
         $comic = Comic :: findOrFail($id);
 
@@ -74,5 +80,35 @@ class PageController extends Controller
         $comic -> delete();
 
         return redirect() -> route("comic.index");
+    }
+
+    private function getValidationRules() {
+
+        return [
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'thumb' => 'required|string',
+            'price' => 'required|string',
+            'series' => 'required|string',
+            'sale_date' => 'required|date',
+            'type' => 'required|string',
+            'artists' => 'required|string',
+            'writers' => 'required|string',
+        ];
+    }
+
+    private function getValidationMessages() {
+
+        return [
+            'title.required' => 'Il titolo è necessario',
+            'description.required' => 'La descrizione è necessaria',
+            'thumb.required' => 'L\'mmagine è necessaria',
+            'price.required' => 'Il prezzo è necessario',
+            'series.required' => 'La serie è necessaria',
+            'sale_date.required' => 'La data è necessaria',
+            'type.required' => 'Il tipo è necessario',
+            'artists.required' => 'L\' artista è necessario',
+            'writers.required' => 'Lo scrittore è necessario',
+        ];
     }
 }
